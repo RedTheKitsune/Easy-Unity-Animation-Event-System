@@ -1,0 +1,18 @@
+{
+    "name": "EasyUnityAnimationEvent.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:4233b5049d96f5846991895f3845e9d3"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
