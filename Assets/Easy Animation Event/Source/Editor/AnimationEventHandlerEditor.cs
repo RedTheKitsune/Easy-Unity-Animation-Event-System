@@ -59,10 +59,12 @@ namespace EasyAnimationEvent
 
                 selectedClipIndex = EditorGUI.Popup(RectValue, clipNameProperty.displayName, selectedClipIndex, ClipNames, EditorStyles.popup);
                 // save value 
-                if (selectedClipIndex >= 0)
+                if (selectedClipIndex < 0)
                 {
-                    clipNameProperty.stringValue = ClipNames[selectedClipIndex];
+                    EditorGUILayout.HelpBox("Please select a clip.", MessageType.Warning);
+                    return;
                 }
+                clipNameProperty.stringValue = ClipNames[selectedClipIndex];
 
                 EditorGUI.BeginChangeCheck();
                 float AnimationDuration = animationClips[selectedClipIndex].length;
