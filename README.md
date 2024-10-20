@@ -10,10 +10,10 @@ Download the folder 'Assets/Easy Animation Event' and place it within your proje
 ```
 
 ## Tutorial
-![1](https://raw.githubusercontent.com/RoxDevvv/Easy-Unity-Animation-Event-System/main/EasyAnimationEvent-1.png)
-![2](https://raw.githubusercontent.com/RoxDevvv/Easy-Unity-Animation-Event-System/main/EasyAnimationEvent-2.png)
-![3](https://raw.githubusercontent.com/RoxDevvv/Easy-Unity-Animation-Event-System/main/EasyAnimationEvent-3.png)
-![4](https://raw.githubusercontent.com/RoxDevvv/Easy-Unity-Animation-Event-System/main/EasyAnimationEvent-4.png)
+![1](https://github.com/RoxDevvv/Easy-Unity-Animation-Event-System/blob/main/EasyAnimationEvent-1.png)
+![2](https://github.com/RoxDevvv/Easy-Unity-Animation-Event-System/blob/main//EasyAnimationEvent-2.png)
+![3](https://github.com/RoxDevvv/Easy-Unity-Animation-Event-System/blob/main//EasyAnimationEvent-3.png)
+![4](https://github.com/RoxDevvv/Easy-Unity-Animation-Event-System/blob/main//EasyAnimationEvent-4.png)
 
 ## Support
 
