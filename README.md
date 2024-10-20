@@ -1,6 +1,6 @@
 # Easy Unity Animation Event
 
-A plugin to make events in unity much easier
+A plugin to simplify animation events in Unity.
 
 
 ## Getting Started
