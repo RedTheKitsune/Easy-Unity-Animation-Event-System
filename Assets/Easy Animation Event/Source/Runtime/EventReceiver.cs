@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace EasyAnimationEvent
@@ -16,7 +17,7 @@ namespace EasyAnimationEvent
     public class EventReceiver : MonoBehaviour
     {
         // Dictionary storing callbacks and their names for each timeline position.
-        private readonly Dictionary<float, List<(Action callback, string name)>> CallbacksPoll = new Dictionary<float, List<(Action callback, string name)>>();
+        private readonly Dictionary<string, List<(Action callback, string name)>> CallbacksPoll = new Dictionary<string, List<(Action callback, string name)>>();
 
         /// <summary>
         /// Registers a callback to be invoked at a specific timeline position.
@@ -24,7 +25,7 @@ namespace EasyAnimationEvent
         /// <param name="position">The timeline position at which the callback should be invoked.</param>
         /// <param name="callback">The callback to register.</param>
         /// <param name="name">The name of the callback.</param>
-        public void RegisterEvent(float position, Action callback, string name)
+        public void RegisterEvent(string key, Action callback, string name)
         {
             if (callback == null)
             {
@@ -37,13 +38,13 @@ namespace EasyAnimationEvent
                 Debug.LogWarning("Attempted to register a callback with a null or empty name.");
                 return;
             }
-
-            if (!CallbacksPoll.ContainsKey(position))
+            
+            if (!CallbacksPoll.ContainsKey(key))
             {
-                CallbacksPoll[position] = new List<(Action callback, string name)>();
+                CallbacksPoll[key] = new List<(Action callback, string name)>();
             }
 
-            CallbacksPoll[position].Add((callback, name));
+            CallbacksPoll[key].Add((callback, name));
         }
 
         /// <summary>
@@ -52,17 +53,17 @@ namespace EasyAnimationEvent
         /// <param name="position">The timeline position from which the callback should be unregistered.</param>
         /// <param name="name">The name of the callback to unregister.</param>
         /// <returns>True if it was the last callback for the position and the position was removed; otherwise, false.</returns>
-        public bool UnregisterEvent(float position, string name)
+        public bool UnregisterEvent(string key)
         {
-            if (string.IsNullOrEmpty(name))
+            if (string.IsNullOrEmpty(key))
             {
                 Debug.LogWarning("Attempted to unregister a callback with a null or empty name.");
                 return false;
             }
 
-            if (!CallbacksPoll.TryGetValue(position, out var callbacks))
+            if (!CallbacksPoll.TryGetValue(key, out var callbacks))
             {
-                Debug.LogWarning($"Attempted to unregister a callback not registered at position {position}.");
+                Debug.LogWarning($"Attempted to unregister a callback not registered at key {key}.");
                 return false;
             }
 
@@ -78,7 +79,7 @@ namespace EasyAnimationEvent
 
             if (callbacks.Count == 0)
             {
-                CallbacksPoll.Remove(position);
+                CallbacksPoll.Remove(key);
                 return true;
             }
 
@@ -89,11 +90,11 @@ namespace EasyAnimationEvent
         /// Invoked by Unity's animation system to trigger callbacks at a specific timeline position.
         /// </summary>
         /// <param name="position">The timeline position at which to trigger callbacks.</param>
-        private void OnEvent(float position)
+        private void OnEvent(string key)
         {
-            if (!CallbacksPoll.TryGetValue(position, out var callbacks))
+            if (!CallbacksPoll.TryGetValue(key, out var callbacks))
             {
-                Debug.LogWarning($"No callbacks registered for timeline position {position}.");
+                Debug.LogWarning($"No callbacks registered for timeline position {key}.");
                 return;
             }
 

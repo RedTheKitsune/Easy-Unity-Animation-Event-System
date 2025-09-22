@@ -15,8 +15,12 @@ namespace EasyAnimationEvent
         /// List of AnimationEventData instances representing animation events to manage.
         public List<AnimationEventData> animationEvents = new List<AnimationEventData>();
 
+        public bool initializeOnAwake = true;
+
         private void Awake()
         {
+            if(!initializeOnAwake) return;
+            
             animator = GetComponent<Animator>();
         }
 

@@ -187,6 +187,10 @@ namespace EasyAnimationEvent
             GUILayout.EndHorizontal();
 
             GUILayout.Space(10); // Add some more spacing
+            
+            script.initializeOnAwake = GUILayout.Toggle(script.initializeOnAwake, "Initialize On Awake");
+            
+            GUILayout.Space(5); // Add some more spacing
 
             if (animator != null && animator.runtimeAnimatorController != null)
             {

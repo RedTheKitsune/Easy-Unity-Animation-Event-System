@@ -84,7 +84,7 @@ namespace EasyAnimationEvent
                 }
 
                 // Register the callback at the specified timeline position
-                eventReceiver.RegisterEvent(position, callback, methodName);
+                eventReceiver.RegisterEvent(AnimationEventUtils.ConstructKey(clip, position), callback, methodName);
 
                 // Add an AnimationEvent to the AnimationClip if it doesn't already exist
                 clip.AddEventIfNotExists(OnEvent, position, position);
@@ -98,7 +98,7 @@ namespace EasyAnimationEvent
                 }
 
                 // Unregister the callback from the EventReceiver
-                var lastEventForPositionRemoved = eventReceiver.UnregisterEvent(position, methodName);
+                var lastEventForPositionRemoved = eventReceiver.UnregisterEvent(AnimationEventUtils.ConstructKey(clip, position));
                 if (lastEventForPositionRemoved)
                 {
                     // Remove the AnimationEvent from the AnimationClip if it was the last event at that position
@@ -116,16 +116,18 @@ namespace EasyAnimationEvent
         /// <param name="time">The time in the animation clip timeline associated with the event.</param>
         private static void AddEventIfNotExists(this AnimationClip clip, string methodName, float floatParameter, float time)
         {
+            var key = AnimationEventUtils.ConstructKey(clip, floatParameter);
+            
             var clipAnimationEvents = clip.events;
             var animationEvent = Array.Find(clipAnimationEvents,
-                e => e.functionName == methodName && e.floatParameter == floatParameter && e.time == time);
+                e => e.functionName == methodName && e.stringParameter == key && e.time == time);
 
             if (animationEvent == null)
             {
                 // Create a new AnimationEvent and add it to the AnimationClip
                 animationEvent = new AnimationEvent();
                 animationEvent.functionName = methodName;
-                animationEvent.floatParameter = floatParameter;
+                animationEvent.stringParameter = key;
                 animationEvent.time = time;
                 clip.AddEvent(animationEvent);
             }
