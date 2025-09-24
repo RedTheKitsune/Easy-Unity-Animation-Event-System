@@ -19,13 +19,10 @@ namespace EasyAnimationEvent
 
         private void Awake()
         {
+            animator = GetComponent<Animator>();
+            
             if(!initializeOnAwake) return;
             
-            animator = GetComponent<Animator>();
-        }
-
-        private void Start()
-        {
             AddEvents();
         }
 

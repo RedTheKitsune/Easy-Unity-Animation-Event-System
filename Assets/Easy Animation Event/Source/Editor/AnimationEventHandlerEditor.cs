@@ -188,7 +188,7 @@ namespace EasyAnimationEvent
 
             GUILayout.Space(10); // Add some more spacing
             
-            script.initializeOnAwake = GUILayout.Toggle(script.initializeOnAwake, "Initialize On Awake");
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("initializeOnAwake"), new GUIContent("Initialize on Awake"));
             
             GUILayout.Space(5); // Add some more spacing
 
